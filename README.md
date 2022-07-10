@@ -1,6 +1,6 @@
 # UPDATask
  Simple Task tom manage data using identity , dataTables, SweetAlert2
-##How to run the application locally:
+## How to run the application locally:
 1.	Download and install.Net5 SDK from  https://dotnet.microsoft.com/en-us/download/dotnet/5.0
 2.	Restore packages.
 3.	Update the connection string in appsetting.json 
