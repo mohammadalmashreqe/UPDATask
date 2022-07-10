@@ -1,0 +1,102 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Core.Entities
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+<h1>Home</h1>
+
+
+<div class="row">
+
+    @if (User.IsInRole("Admin") || User.IsInRole("HR"))
+    {
+        <div class="col-md-4">
+
+            <div class="card">
+                <div class="card-header">
+                    Employee Management
+                </div>
+                <div class="card-body">
+                    <form method="get" asp-action="GoToEmployeeMNGMNT" asp-controller="Home">
+
+                        <button type="submit" class="btn btn-primary">Employee Management</button>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-4">
+
+            <div class="card">
+                <div class="card-header">
+                    Roles Management
+                </div>
+                <div class="card-body">
+                    <form method="get" asp-action="Index" asp-controller="Role">
+
+                        <button type="submit" class="btn btn-primary"> Roles Management</button>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-4">
+
+            <div class="card">
+                <div class="card-header">
+                    Position Management
+                </div>
+                <div class="card-body">
+                    <form method="get" asp-action="Index" asp-controller="Position">
+
+                        <button type="submit" class="btn btn-primary"> Positions Management</button>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card">
+                <div class="card-header">
+                    Departments Management
+                </div>
+                <div class="card-body">
+                    <form method="get" asp-action="Index" asp-controller="Department">
+
+                        <button type="submit" class="btn btn-primary"> Departments Management</button>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+
+    }
+
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                Update Profile
+            </div>
+            <div class="card-body">
+                <form method="get" asp-action="GoToProfileDetails" asp-controller="Home">
+
+                    <button type="submit" class="btn btn-primary"> Profile Details </button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<partial name="_notificationPartial" />

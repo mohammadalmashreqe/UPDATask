@@ -1,0 +1,59 @@
+﻿@model WebUI.Models.UpdateEmployeeInfoViewModel
+
+
+<h4 class="bg-info text-white">Update Employee Info </h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="UpdateEmployeeInfo" enctype="multipart/form-data">
+            <input type="hidden" asp-for="empid" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DepartmentId" class="control-label"></label>
+                @Html.DropDownListFor(model => model.DepartmentId, ViewBag.DepartmentsList as SelectList, "Select Department", new { @class = "form-control" })
+            </div>
+
+
+            <div class="form-group">
+                <label  asp-for="DateofBirth" class="control-label"></label>
+                <input asp-for="DateofBirth" class="form-control" />
+                <span asp-validation-for="DateofBirth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageUrl" class="control-label"></label>
+                <input type="file" asp-for="Image" class="form-control" />
+
+
+                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Update" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    @if (User.IsInRole("Admin") || User.IsInRole("HR"))
+    {
+        <a asp-action="GoToEmployeeMNGMNT">Back to List</a>
+    }
+</div>
+<partial name="_notificationPartial" />
+
+@section scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

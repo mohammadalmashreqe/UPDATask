@@ -1,0 +1,62 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@model IEnumerable<IdentityRole<Guid>>
+
+<h1 class="bg-info text-white">All Roles</h1>
+<a asp-action="Create" class="btn btn-secondary">Create a Role</a>
+<br />
+<div class="container">
+    <br />
+    <div>
+        <table id="roleTBL" class="display" style="width:100%" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Update</th>
+                 
+                </tr>
+            </thead>
+
+        </table>
+    </div>
+</div>
+<partial name="_notificationPartial" />
+
+<script>
+    $(document).ready(function () {
+        $("#roleTBL").DataTable({
+            "processing": true, // for show progress bar
+            "serverSide": true, // for process server side
+            "filter": true, // this is for disable filter (search box)
+            "orderMulti": false, // for disable multiple column at once
+            "ajax": {
+                "url": "/Role/LoadData",
+                "type": "POST",
+                "datatype": "json"
+            },
+            "columnDefs": [{
+                "targets": [0],
+                "visible": false,
+                "searchable": false
+            }, {
+                    "targets": [2],
+
+                    "searchable": false,
+                    "orderable": false
+                }],
+            "columns": [
+                { "data": "id", "name": "Id", "autoWidth": true },
+                { "data": "name", "name": "Name", "autoWidth": true },
+
+
+                {
+                    "render": function (data, type, full, meta) {
+                        return '<a class="btn btn-info" href="/Role/Update/' + full.id + '">Update</a>';
+                    }
+                },
+            
+            ]
+        });
+    });
+   
+</script>
