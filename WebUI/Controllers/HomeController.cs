@@ -325,7 +325,11 @@ namespace WebUI.Controllers
                             string uploads = Path.Combine(_hosting.WebRootPath, @"img\");
                             string fullPath = Path.Combine(uploads, newFileName);
                             model.ImageUrl = newFileName;
-                            model.Image.CopyTo(new FileStream(fullPath, FileMode.Create));
+                            using (var stream = System.IO.File.Create(fullPath))
+                            {
+                                await model.Image.CopyToAsync(stream);
+                            }
+                           
                         }
                         _context.Employees.Add(new Employee
                         {
